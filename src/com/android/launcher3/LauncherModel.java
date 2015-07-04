@@ -60,7 +60,6 @@ import com.android.launcher3.compat.PackageInstallerCompat.PackageInstallInfo;
 import com.android.launcher3.compat.UserHandleCompat;
 import com.android.launcher3.compat.UserManagerCompat;
 import com.android.launcher3.settings.SettingsProvider;
-import com.android.launcher3.stats.internal.service.AggregationIntentService;
 
 import java.lang.ref.WeakReference;
 import java.net.URISyntaxException;
@@ -1068,22 +1067,10 @@ public class LauncherModel extends BroadcastReceiver
     }
 
     /**
-     * Saves the total widget count to a shared preference
-     *
-     * @param context {@link Context}
-     */
-    /* package */ static void saveWidgetCount(Context context) {
-        int widgetCount = LauncherModel.sBgAppWidgets.size();
-        SharedPreferences prefs = context.getSharedPreferences(LauncherAppState
-                        .getSharedPreferencesKey(), Context.MODE_PRIVATE);
-        prefs.edit().putInt(AggregationIntentService.PREF_KEY_WIDGET_COUNT, widgetCount).apply();
-    }
-
-    /**
      * Add an item to the database in a specified container. Sets the container, screen, cellX and
      * cellY fields of the item. Also assigns an ID to the item.
      */
-    static void addItemToDatabase(final Context context, final ItemInfo item, final long container,
+    static void addItemToDatabase(Context context, final ItemInfo item, final long container,
             final long screenId, final int cellX, final int cellY, final boolean notify) {
         item.container = container;
         item.cellX = cellX;
@@ -1135,7 +1122,6 @@ public class LauncherModel extends BroadcastReceiver
                             break;
                         case LauncherSettings.Favorites.ITEM_TYPE_APPWIDGET:
                             sBgAppWidgets.add((LauncherAppWidgetInfo) item);
-                            saveWidgetCount(context);
                             break;
                     }
                 }
@@ -1188,7 +1174,7 @@ public class LauncherModel extends BroadcastReceiver
      * @param context
      * @param item
      */
-    static void deleteItemsFromDatabase(final Context context, final ArrayList<ItemInfo> items) {
+    static void deleteItemsFromDatabase(Context context, final ArrayList<ItemInfo> items) {
         final ContentResolver cr = context.getContentResolver();
 
         Runnable r = new Runnable() {
@@ -1219,7 +1205,6 @@ public class LauncherModel extends BroadcastReceiver
                                 break;
                             case LauncherSettings.Favorites.ITEM_TYPE_APPWIDGET:
                                 sBgAppWidgets.remove((LauncherAppWidgetInfo) item);
-                                saveWidgetCount(context);
                                 break;
                         }
                         sBgItemsIdMap.remove(item.id);
@@ -1232,22 +1217,10 @@ public class LauncherModel extends BroadcastReceiver
     }
 
     /**
-     * Saves the count of workspace pages
-     *
-     * @param context {@link Context}
-     */
-    /* package */ static void savePageCount(Context context) {
-        int pageCount = LauncherModel.sBgWorkspaceScreens.size();
-        SharedPreferences prefs = context.getSharedPreferences(LauncherAppState
-                        .getSharedPreferencesKey(), Context.MODE_PRIVATE);
-        prefs.edit().putInt(AggregationIntentService.PREF_KEY_PAGE_COUNT, pageCount).apply();
-    }
-
-    /**
      * Update the order of the workspace screens in the database. The array list contains
      * a list of screen ids in the order that they should appear.
      */
-    void updateWorkspaceScreenOrder(final Context context, final ArrayList<Long> screens) {
+    void updateWorkspaceScreenOrder(Context context, final ArrayList<Long> screens) {
         // Log to disk
         Launcher.addDumpLog(TAG, "11683562 - updateWorkspaceScreenOrder()", true);
         Launcher.addDumpLog(TAG, "11683562 -   screens: " + TextUtils.join(", ", screens), true);
@@ -1289,7 +1262,6 @@ public class LauncherModel extends BroadcastReceiver
                 synchronized (sBgLock) {
                     sBgWorkspaceScreens.clear();
                     sBgWorkspaceScreens.addAll(screensCopy);
-                    savePageCount(context);
                 }
             }
         };
