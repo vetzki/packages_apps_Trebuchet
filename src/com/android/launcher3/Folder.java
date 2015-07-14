@@ -134,7 +134,7 @@ public class Folder extends LinearLayout implements DragSource, View.OnClickList
     private boolean mItemAddedBackToSelfViaIcon = false;
     View mFolderNameLockContainer;
     FolderEditText mFolderName;
-    ImageView mFolderLock;
+    //ImageView mFolderLock;
     private int mScreenWidth;
     private float mFolderIconPivotX;
     private float mFolderIconPivotY;
@@ -257,11 +257,10 @@ public class Folder extends LinearLayout implements DragSource, View.OnClickList
             mFolderName.setVisibility(View.GONE);
         }
 
-        mFolderLock = (ImageView) findViewById(R.id.folder_lock);
+        /*mFolderLock = (ImageView) findViewById(R.id.folder_lock);
         mFolderLock.measure(measureSpec, measureSpec);
         mFolderLock.setOnClickListener(this);
-        mFolderLockHeight = mFolderLock.getMeasuredHeight();
-
+        mFolderLockHeight = mFolderLock.getMeasuredHeight();*/
         DisplayMetrics displayMetrics = this.getResources().getDisplayMetrics();
         mScreenWidth = displayMetrics.widthPixels;
     }
@@ -659,7 +658,7 @@ public class Folder extends LinearLayout implements DragSource, View.OnClickList
                     circX, circY, 0, mScreenWidth);
 
             final View[] alphaViewSet = new View[] { mFolderNameLockContainer,
-                    mContent, mFolderName, mFolderLock };
+                    mContent, mFolderName };
             for (View view : alphaViewSet) {
                 view.setAlpha(0f);
             }

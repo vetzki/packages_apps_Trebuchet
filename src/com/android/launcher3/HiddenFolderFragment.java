@@ -53,7 +53,7 @@ public class HiddenFolderFragment extends Fragment {
     private boolean mAuth = false;
     private boolean mSent = false;
 
-    private OnClickListener mClicklistener = new OnClickListener() {
+    /*private OnClickListener mClicklistener = new OnClickListener() {
         @Override
         public void onClick(View v) {
             mHidden = !mHidden;
@@ -63,7 +63,7 @@ public class HiddenFolderFragment extends Fragment {
                     : getResources().getDrawable(R.drawable.folder_unlocked);
             mLock.setImageDrawable(mLockIcon);
         }
-    };
+    };*/
 
     @Override
     public View onCreateView (LayoutInflater inflater, ViewGroup container,
@@ -102,11 +102,11 @@ public class HiddenFolderFragment extends Fragment {
             }
         });
 
-        ImageView mLock = (ImageView) v.findViewById(R.id.folder_lock_icon);
+        /*ImageView mLock = (ImageView) v.findViewById(R.id.folder_lock_icon);
         Drawable mLockIcon = mHidden ? getResources().getDrawable(R.drawable.folder_locked)
                 : getResources().getDrawable(R.drawable.folder_unlocked);
         mLock.setImageDrawable(mLockIcon);
-        mLock.setOnClickListener(mClicklistener);
+        mLock.setOnClickListener(mClicklistener);*/
 
         mAppsAdapter = new AppsAdapter(mLauncher, R.layout.hidden_apps_list_item);
         mAppsAdapter.setNotifyOnChange(true);

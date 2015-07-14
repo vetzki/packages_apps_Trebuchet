@@ -27,13 +27,6 @@
         android:layout_gravity="center_horizontal|top"
         android:background="@drawable/folder_bg" >
         <ImageView
-            android:id="@+id/folder_lock_image"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:src="@drawable/folder_locked"
-            android:scaleType="center"
-            android:visibility="invisible" />
-        <ImageView
             android:id="@+id/app_0"
             android:layout_width="@dimen/folder_icon_app_preview"
             android:layout_height="@dimen/folder_icon_app_preview"

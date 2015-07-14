@@ -701,8 +701,8 @@ public class FolderIcon extends FrameLayout implements FolderListener {
         int nItemsInPreview = Math.min(items.size(), NUM_ITEMS_IN_PREVIEW);
 
         // Hidden folder - don't display Preview
-        View folderLock = findViewById(R.id.folder_lock_image);
-        folderLock.setVisibility(mInfo.hidden ? VISIBLE : INVISIBLE);
+        /*View folderLock = findViewById(R.id.folder_lock_image);
+        folderLock.setVisibility(mInfo.hidden ? VISIBLE : INVISIBLE);*/
         View appView = findViewById(R.id.app_0);
         appView.setVisibility(mInfo.hidden ? INVISIBLE : VISIBLE);
         appView = findViewById(R.id.app_1);
